@@ -1,6 +1,7 @@
 ﻿package 
 {
 	import flash.display.Sprite;
+	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.filters.GlowFilter;
@@ -16,9 +17,11 @@
 	{
 		private var tf:TextField;
 		private var tff:TextFormat;
+		private var color:uint;
 		
 		public function Main():void 
 		{
+			color = uint(Math.random() * 255 * 255 * 255);
 			tf = new TextField();
 			tff = new TextFormat("_sans", 20, 0x000000, true);
 			tf.defaultTextFormat = tff;
@@ -31,6 +34,7 @@
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.align = StageAlign.TOP_LEFT;
 			update();
 			stage.addEventListener(Event.RESIZE, resizeListener);
 		}
@@ -49,8 +53,8 @@
 			tf.filters = [new GlowFilter(0xFFFFFF)];
 			graphics.clear();
 			graphics.lineStyle(1, 0x000000);
-			graphics.beginFill(uint(Math.random() * 255 * 255 * 255), 1);			
-			graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight);
+			graphics.beginFill(color, 1);			
+			graphics.drawRect(0, 0, stage.stageWidth - 1, stage.stageHeight - 1);
 			graphics.moveTo(stage.stageWidth / 2, 0);
 			graphics.lineTo(stage.stageWidth / 2, stage.stageHeight);
 			graphics.moveTo(0, stage.stageHeight / 2);
